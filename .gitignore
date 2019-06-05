@@ -1,0 +1,11 @@
+spring-batch-beetlsql/target
+spring-batch-db2db/target
+spring-batch-file2db/target
+spring-batch-helloworld/target
+spring-batch-increment/target
+spring-batch-xxl-executor/target
+xxl-job/xxl-job-admin/target
+xxl-job/xxl-job-core/target
+*.iml
+.idea
+logs
