@@ -32,3 +32,7 @@
 - `spring-batch-xxl-executor` 和 `xxl-job`
 
 示例功能是在增量同步的基础上，实现企业级的数据同步和调度框架结合，结合`xxl-job`，实现任务调度，并查看数据同步结果。
+
+- `spring-batch-mysql2mongo`
+
+示例功能: 使用Mongo相组件，实现mysql --> mongodb 的数据同步。
