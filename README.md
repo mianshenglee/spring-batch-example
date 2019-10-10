@@ -21,7 +21,7 @@
 
 - `spring-batch-beetlsql`
 
-示例功能是与`spring-batch-db2db`一致，只量更改了读数据库和写数据库的组件，改为使用`BeetlSql`，更简单，更灵活。
+示例功能是与`spring-batch-db2db`一致，只是更改了读数据库和写数据库的组件，改为使用`BeetlSql`，更简单，更灵活。
 
 
 - `spring-batch-increment`
