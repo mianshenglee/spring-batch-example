@@ -3,7 +3,6 @@ package me.mason.springbatch;
 import lombok.extern.slf4j.Slf4j;
 import me.mason.springbatch.common.SyncConstants;
 import me.mason.springbatch.example.beetlsql.config.BeetlsqlBatchConfig;
-import me.mason.springbatch.example.db2db.config.Db2DbBatchConfig;
 import me.mason.springbatch.service.batch.JobLauncherService;
 import me.mason.springbatch.util.JobUtil;
 import org.junit.Assert;
