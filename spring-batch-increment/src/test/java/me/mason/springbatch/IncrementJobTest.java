@@ -2,11 +2,9 @@ package me.mason.springbatch;
 
 import lombok.extern.slf4j.Slf4j;
 import me.mason.springbatch.common.SyncConstants;
-import me.mason.springbatch.example.beetlsql.config.BeetlsqlBatchConfig;
 import me.mason.springbatch.example.increment.config.IncrementBatchConfig;
 import me.mason.springbatch.service.IncrementService;
 import me.mason.springbatch.service.batch.JobLauncherService;
-import me.mason.springbatch.util.JobUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
