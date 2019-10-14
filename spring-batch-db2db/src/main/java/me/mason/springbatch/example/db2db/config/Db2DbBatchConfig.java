@@ -61,8 +61,9 @@ public class Db2DbBatchConfig {
 
     @Bean
     public ItemReader db2DbItemReader(@Qualifier("originDatasource") DataSource originDatasource) {
+        String funcName = Thread.currentThread().getStackTrace()[1].getMethodName();
         String readSql = " select * from test_user";
-        return new JdbcCursorItemReaderBuilder<User>()
+        return new JdbcCursorItemReaderBuilder<User>().name(funcName)
                 .dataSource(originDatasource).sql(readSql)
                 .verifyCursorPosition(false).rowMapper(new UserRowMapper())
                 .build();
