@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>me.mason.springbatch</groupId>
+	<artifactId>spring-batch-param</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>spring-batch-param</name>
+	<description>example: param in job</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.4.RELEASE</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<swagger.version>2.7.0</swagger.version>
+
+		<!--jsw daemon -->
+		<daemon-name>${project.name}</daemon-name>
+		<daemon-mainClass>me.mason.springbatch.MainBootApplication</daemon-mainClass>
+		<daemon-JAVA_Xms>1024M</daemon-JAVA_Xms>
+		<daemon-JAVA_Xmx>1024M</daemon-JAVA_Xmx>
+		<daemon-JAVA_OPS></daemon-JAVA_OPS>
+		<wrapper.ntservice.name>${project.name}</wrapper.ntservice.name>
+		<wrapper.ntservice.displayname>${project.name}</wrapper.ntservice.displayname>
+		<wrapper.ntservice.description>${project.description}</wrapper.ntservice.description>
+	</properties>
+
+	<dependencies>
+		<!-- spring boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- 数据库相关-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- swagger接口 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+		<!-- 批处理框架-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>3.4.0</version>
+		</dependency>
+		<!-- 工具包：hutool -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>4.5.7</version>
+        </dependency>
+		<!-- 工具包：lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.6</version>
+		</dependency>
+    </dependencies>
+
+	<build>
+		<plugins>
+			<!--<plugin>-->
+				<!--<groupId>org.springframework.boot</groupId>-->
+				<!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+			<!--</plugin>-->
+
+			<plugin>
+				<!-- http://www.mojohaus.org/appassembler/appassembler-maven-plugin/usage-daemon-generatorconfig.html -->
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>appassembler-maven-plugin</artifactId>
+				<version>2.0.0</version>
+				<executions>
+					<execution>
+						<id>generate-jsw-scripts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>generate-daemons</goal>
+						</goals>
+						<configuration>
+							<repositoryLayout>flat</repositoryLayout>
+							<encoding>${project.build.sourceEncoding}</encoding>
+							<!--<includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>-->
+							<!-- copy the src/main/resources directory to /src -->
+							<!--为系统配置文件指定一个目录-->
+							<configurationDirectory>conf</configurationDirectory>
+							<!--源代码中对应的系统配置文件的位置-->
+							<configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
+							<copyConfigurationDirectory>true</copyConfigurationDirectory>
+							<logsDirectory>logs</logsDirectory>
+							<daemons>
+								<daemon>
+									<id>${daemon-name}</id>
+									<mainClass>${daemon-mainClass}</mainClass>
+									<jvmSettings>
+										<initialMemorySize>${daemon-JAVA_Xmx}</initialMemorySize>
+										<maxMemorySize>${daemon-JAVA_Xmx}</maxMemorySize>
+										<extraArguments>
+											<!-- Note : if the value is empty the plugin will throw NullPointerException-->
+											<extraArgument>-Djava.wrapper=1 ${daemon-JAVA_OPS}</extraArgument>
+											<extraArgument>-verbose:gc </extraArgument>
+											<extraArgument>-XX:+PrintHeapAtGC </extraArgument>
+											<extraArgument>-XX:+PrintGCDetails </extraArgument>
+											<extraArgument>-XX:+PrintGCDateStamps </extraArgument>
+											<extraArgument>-XX:+PrintGCTimeStamps </extraArgument>
+											<extraArgument>-XX:+PrintTenuringDistribution </extraArgument>
+											<extraArgument>-XX:+PrintGCApplicationStoppedTime </extraArgument>
+											<extraArgument>-Xloggc:logs/gc.log </extraArgument>
+											<extraArgument>-XX:+HeapDumpOnOutOfMemoryError </extraArgument>
+											<extraArgument>-XX:HeapDumpPath=logs/gc.hprof  </extraArgument>
+											<extraArgument>-XX:ErrorFile=logs/java_error_%p.log</extraArgument>
+											<!--<extraArgument>-Xbootclasspath/p:lib/alpn-boot-${alpn.boot.version}.jar</extraArgument>-->
+										</extraArguments>
+									</jvmSettings>
+									<platforms>
+										<platform>jsw</platform>
+									</platforms>
+									<generatorConfigurations>
+										<generatorConfiguration>
+											<generator>jsw</generator>
+											<includes>
+												<include>linux-x86-32</include>
+												<include>linux-x86-64</include>
+												<include>macosx-universal-64</include>
+												<include>macosx-universal-32</include>
+												<include>windows-x86-32</include>
+												<include>windows-x86-64</include>
+											</includes>
+											<configuration>
+												<property>
+													<name>configuration.directory.in.classpath.first</name>
+													<value>conf</value>
+												</property>
+												<property>
+													<name>set.default.REPO_DIR</name>
+													<value>lib</value>
+												</property>
+												<property>
+													<name>wrapper.java.command</name>
+													<value>%JAVA_HOME%/bin/java</value>
+												</property>
+												<property>
+													<name>wrapper.logfile</name>
+													<value>logs/wrapper.log</value>
+												</property>
+												<property>
+													<name>wrapper.startup.timeout</name>
+													<value>7200</value><!-- 2小时 -->
+												</property>
+												<property>
+													<name>wrapper.ping.timeout</name>
+													<value>3600</value><!-- 1小时 -->
+												</property>
+												<property>
+													<name>wrapper.ntservice.name</name>
+													<value>${wrapper.ntservice.name}</value>
+												</property>
+												<property>
+													<name>wrapper.ntservice.displayname</name>
+													<value>${wrapper.ntservice.displayname}</value>
+												</property>
+												<property>
+													<name>wrapper.ntservice.description</name>
+													<value>${wrapper.ntservice.description}</value>
+												</property>
+												<property>
+													<name>wrapper.console.title</name>
+													<value>${wrapper.ntservice.name}</value>
+												</property>
+												<property>
+													<!-- 如果pid文件已经存在则不启动程序 -->
+													<name>wrapper.pidfile.strict</name>
+													<value>TRUE</value>
+												</property>
+											</configuration>
+										</generatorConfiguration>
+									</generatorConfigurations>
+								</daemon>
+							</daemons>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
