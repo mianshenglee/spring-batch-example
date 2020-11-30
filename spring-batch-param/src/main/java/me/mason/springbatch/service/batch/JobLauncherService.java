@@ -50,6 +50,7 @@ public class JobLauncherService {
         stopWatch.start(job.getName());
         //执行任务
         JobExecution run = jobLauncher.run(job, jobParameters);
+        log.debug(LogConstants.LOG_TAG + run.toString());
         //返回结果
         StringBuffer stringBuffer = new StringBuffer();
         Collection<StepExecution> stepExecutions = run.getStepExecutions();

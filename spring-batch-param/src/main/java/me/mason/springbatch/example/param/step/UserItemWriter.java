@@ -43,6 +43,7 @@ public class UserItemWriter implements ItemWriter<TargetUser>, StepExecutionList
         for (TargetUser item : items) {
             users.add(item);
         }
+//        targetUserService.saveBatch(users);
         targetUserService.saveOrUpdateBatch(users);
     }
 

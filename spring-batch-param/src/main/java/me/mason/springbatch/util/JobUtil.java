@@ -15,8 +15,16 @@ public class JobUtil {
      * @return
      */
     public static JobParameters makeJobParameters() {
+        return makeJobParameters(System.currentTimeMillis());
+    }
+
+    /**
+     * 以当前时间作为参数，构建JobParameters
+     * @return
+     */
+    public static JobParameters makeJobParameters(long timMillis) {
         JobParameters jobParameters = new JobParametersBuilder()
-                .addLong("time",System.currentTimeMillis())
+                .addLong("time",timMillis)
                 .toJobParameters();
         return jobParameters;
     }

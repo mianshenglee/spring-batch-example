@@ -28,7 +28,7 @@ import java.util.Map;
  **/
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {MainBootApplication.class, ParamBatchConfig.class})
+@SpringBootTest
 @Slf4j
 public class ParamJobTest {
 
@@ -42,6 +42,7 @@ public class ParamJobTest {
     public void testParamJob() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
         //构建job参数
         JobParameters jobParameters = JobUtil.makeJobParameters();
+//        JobParameters jobParameters = JobUtil.makeJobParameters(1606206186593L);
         //运行job
         Map<String, Object> stringObjectMap = jobLauncherService.startJob(paramJob, jobParameters);
         //测试结果

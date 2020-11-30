@@ -41,7 +41,9 @@ public class UserItemReader implements ItemReader<User> {
         if (Objects.isNull(items)) {
             items = originUserService.getUsers();
             ExecutionContext executionContext = stepExecution.getJobExecution().getExecutionContext();
+            //readNum参数
             executionContext.put(SyncConstants.PASS_PARAM_READ_NUM, items.size());
+            //datetime参数
             executionContext.put(SyncConstants.PASS_PARAM_DATETIME,params.get(SyncConstants.PASS_PARAM_DATETIME));
             if (items.size() > 0) {
                 return items.remove(0);

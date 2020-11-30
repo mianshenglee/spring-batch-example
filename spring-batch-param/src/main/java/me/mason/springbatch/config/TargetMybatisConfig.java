@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 /**
- * TODO
+ * 目标数据库配置
  *
  * @author: mason
  * @date: 2020/11/20
