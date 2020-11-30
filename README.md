@@ -13,6 +13,7 @@
 - [spring-batch-increment](https://github.com/mianshenglee/spring-batch-example/tree/master/spring-batch-increment)
 - [spring-batch-xxl-executor](https://github.com/mianshenglee/spring-batch-example/tree/master/spring-batch-xxl-executor) 与 [xxl-job](https://github.com/mianshenglee/spring-batch-example/tree/master/xxl-job)
 - [spring-batch-mysql2mongo](https://github.com/mianshenglee/spring-batch-example/tree/master/spring-batch-mysql2mongo)
+- [spring-batch-param](https://github.com/mianshenglee/spring-batch-example/tree/master/spring-batch-param)
 
 示例说明如下：
 
@@ -62,6 +63,12 @@
 
 - 配套文章：[mongo同步-spring batch(8)的mongo读写组件使用][8]
 
+### `spring-batch-param`
+
+示例功能: 在 Spring Batch 中进行数据及参数传递的方法。
+
+- 配套文章：[数据共享-spring batch(9)上下文处理][9]
+
 ## 示例使用
 
 示例都是基于spring boot建立的java工程，使用maven进行包管理。因此直接使用开发工具如`eclipse`或`idea`导入maven工程即可使用，有几点需要注意：
@@ -82,6 +89,7 @@
 - [增量同步-spring batch(6)动态参数绑定与增量同步][6]
 - [调度与监控-spring batch(7)结合xxl-job进行批处理][7]
 - [mongo同步-spring batch(8)的mongo读写组件使用][8]
+- [数据共享-spring batch(9)上下文处理][9]
 
 ## 与我交流
 
@@ -99,4 +107,5 @@
 [5]: https://mianshenglee.github.io/2019/06/10/spring-batch(5).html
 [6]: https://mianshenglee.github.io/2019/06/11/spring-batch(6).htm
 [7]: https://mianshenglee.github.io/2019/06/12/spring-batch(7).html
-[8]:https://mianshenglee.github.io/2019/08/09/spring-batch(8).html
+[8]: https://mianshenglee.github.io/2019/08/09/spring-batch(8).html
+[9]: https://mianshenglee.github.io/2020/11/30/spring-batch(9).html
